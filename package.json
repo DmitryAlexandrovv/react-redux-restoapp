@@ -36,5 +36,8 @@
   "main": "index.js",
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "json-server": "^0.16.1"
+  }
 }
