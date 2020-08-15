@@ -3,6 +3,7 @@ const initialState = {
     loading: true,
     error: false,
     items: [],
+    total: 0,
 }
 
 const reducer = (state = initialState, action) => {
@@ -39,7 +40,8 @@ const reducer = (state = initialState, action) => {
                 items: [
                     ...state.items,
                     newItem,
-                ]
+                ],
+                total: state.total + newItem.price,
             };
         case 'ITEM_REMOVE_FROM_CART':
             const idx = action.payload;
@@ -49,7 +51,8 @@ const reducer = (state = initialState, action) => {
                 items: [
                     ...state.items.slice(0, itemIndex),
                     ...state.items.slice(itemIndex + 1),
-                ]
+                ],
+                total: state.total - state.items[itemIndex].price,
             };
         default:
             return state;

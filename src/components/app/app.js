@@ -3,13 +3,13 @@ import {MainPage, CartPage} from '../pages';
 import AppHeader from '../app-header';
 import WithRestoService from '../hoc';
 import {Route, Switch} from 'react-router-dom';
-import ItemPage from '../pages/ItemPage';
+import ItemPage from '../pages/itemPage/ItemPage';
 
 import Background from './food-bg.jpg';
 
 const App = ({RestoService}) => {
     return (
-            <div style={{background: `url(${Background}) center center/cover no-repeat`}} className="app">
+            <div style={{background: `url(${Background}) center center/cover no-repeat`, minHeight: `100vh`}} className="app">
             <AppHeader total={50}/>
             <Switch>
                 <Route path='/' exact component={MainPage}/>

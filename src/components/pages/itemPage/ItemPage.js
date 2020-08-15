@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import MenuListItem from '../menu-list-item';
-import WithRestoService from '../hoc';
-import {menuLoaded, menuRequested, menuOnError, toggleSelectedItem} from '../../actions';
-import Spinner from '../spinner';
-import Error from '../error';
+import MenuListItem from '../../menu-list-item';
+import WithRestoService from '../../hoc';
+import {menuLoaded, menuRequested, menuOnError, addToCart} from '../../../actions';
+import Spinner from '../../spinner';
+import Error from '../../error';
+import './itemPage.scss';
 
 class ItemPage extends Component {
     componentDidMount() {
@@ -30,16 +31,16 @@ class ItemPage extends Component {
             return <Spinner />;
         }
 
-        const {title, price, url, category} = menuItems[menuId];
+        const {title, price, url, category, id} = menuItems.find(item => item.id == menuId);
 
         return(
-            <li className="menu__item">
+            <div className="menu__item menu__item-page">
                 <div className="menu__title">{title}</div>
                 <img className="menu__img" src={url} alt={title}></img>
                 <div className="menu__category">Category: <span>{category}</span></div>
                 <div className="menu__price">Price: <span>{price}$</span></div>
-                <button className="menu__btn">Add to cart</button>
-            </li>
+                <button onClick={() => this.props.addToCart(id)} className="menu__btn">Add to cart</button>
+            </div>
         )
     }
 }
@@ -54,6 +55,7 @@ const mapDispatchToProps = {
     menuLoaded,
     menuRequested,
     menuOnError,
+    addToCart,
 }
 
 export default WithRestoService()(connect(mapStateToProps, mapDispatchToProps)(ItemPage));
